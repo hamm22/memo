@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>회원가입</title>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
@@ -23,15 +23,16 @@
 					<h2 class="text-center">회원 가입</h2>
 					<input type="text" placeholder="아이디" class="form-control mt-5" id="idInput">
 					<input type="password" placeholder="비밀번호" class="form-control mt-3" id="passwordInput">	
-					<input type="passwordConfirm" placeholder="비밀번호확인" class="form-control mt-3" id="passwordconfirmInput">	
+								<input type="password" placeholder="비밀번호 확인" class="form-control mt-2" id="passwordConfirmInput">
 					<input type="text" placeholder="이름" class="form-control mt-3" id="nameInput">	
 					<input type="text" placeholder="이메일" class="form-control mt-3" id="emailInput">
 					<button type="button" class="btn btn-secondary btn-block mt-3" id="joinBtn">가입</button>
 									
 				</div>
 		</section>
-		
-		<footer class="d-flex justify-center align-items-center">
+	</div>
+	
+		<footer class="d-flex justify-content-center align-items-center">
 		
 		<div>
 			Copyright 2024. ham All rights reserved.
@@ -47,58 +48,65 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
 
 <script>
-		$(document).ready(function(){
-		
-		$("#joinBtn").on("click", function(){
-			
-			let id = $("#idInput").val();
-			let password = $("passwordInput").val();
-			let passwordConfirm = $("passwordconfirmInput").val();
-			let name = $("nameInput").val();
-			let email = $("emailInput").val();
-			
-			if(id == ""){
-				alert("아이디를 입력하세요");
-				return;
-			}
-			if(password == ""){
-				alert("비밀번호를 입력하세요");
-				return;
-			}
-			if(password != passwordConfirm){
-				alert("비밀번호를 일치안함");
-				return;
-			}
-			if(name == ""){
-				alert("이름을 입력하세요");
-				return;
-			}
-			if(email == ""){
-				alert("이메일을 입력하세요");
-				return;
-			}
-			
-			$.ajax({
-				type:"post"
-				, url:"/user/join"
-				, data:{"loginId":id, "password":password, "name":name, "email":email}
-				, success:function(data ){
-					if(data.result == "success"){
-						location.href = "/user/login-view";
-					} else{
-						alert("회원가입 실패");
+		$(document).ready(function() {
+			$("#joinBtn").on("click", function() {
+				
+				let id = $("#idInput").val();
+				let password = $("#passwordInput").val();
+				let passwordConfirm = $("#passwordConfirmInput").val();
+				let name = $("#nameInput").val();
+				let email = $("#emailInput").val();
+				
+				// 유효성 검사 
+				if(id == "") {
+					alert("아이디를 입력하세요");
+					return ;
+				}
+				
+				if(password == "") {
+					alert("비밀번호를 입력하세요");
+					return ;
+				}
+				
+				if(password != passwordConfirm) {
+					alert("비밀번호가 일치하지 않습니다");
+					return ;
+				}
+				
+				if(name == "") {
+					alert("이름을 입력하세요");
+					return 0;
+				}
+				
+				if(email == "") {
+					alert("이메일을 입력하세요");
+					return ;
+				}
+				
+				
+				$.ajax({
+					type:"post"
+					, url:"/user/join"
+					, data:{"loginId":id, "password":password, "name":name, "email":email}
+					, success:function(data) {
+						if(data.result == "success") {
+							location.href = "/user/login-view";
+						} else {
+							alert("가입 실패");
+						}
 					}
-				}
-				, error:function() {
-					alert("회원가입 에러!");
-				}
+					, error:function() {
+						alert("가입 에러!!");
+					}
+				});
+				
 				
 			});
 			
 		});
-		
-	});
-</script>
+	
+	
+	</script>
 	
 
 </body>

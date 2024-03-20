@@ -14,7 +14,7 @@
 			, `name`
 			, `email`
 		)	
-		Value
+		VALUE
 		(
 			#{loginId}
 			, #{password}
