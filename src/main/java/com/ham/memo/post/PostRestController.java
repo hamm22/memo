@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ham.memo.post.service.PostService;
 
@@ -24,6 +25,7 @@ public class PostRestController {
 	public Map<String, String> createMemo(
 						@RequestParam("title") String title
 						, @RequestParam("contents") String contents
+						, @RequestParam(value="imageFile", required=false) MultipartFile file // 필수항목이 아닌경우 required=false
 						, HttpSession session) {
 		
 		// 세션에 저장된 userId 값을 얻어온다.
@@ -33,7 +35,7 @@ public class PostRestController {
 		// Upcasting, downcasting
 		int userId = (Integer)session.getAttribute("userId"); // userId 정수
 		
-int count = postService.addPost(userId, title, contents);
+		int count = postService.addPost(userId, title, contents, file);
 		
 		Map<String, String> resultMap = new HashMap<>();
 		if(count == 1) {

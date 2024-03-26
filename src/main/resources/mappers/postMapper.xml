@@ -12,12 +12,14 @@
 			`userId`
 			, `title`
 			, `contents`
+			, `imagePath`
 		)
 		VALUE 
 		(
 			#{userId}
 			, #{title}
 			, #{contents}
+			, #{imagePath}
 		)
  	</insert>
  	
@@ -40,8 +42,8 @@
  	</select>
  	
  	<select id="selectPost" parameterType="int"
- 		resultType="com.ham.memo.post.domain.Post">
- 		SELECT 
+	resultType="com.ham.memo.post.domain.Post">
+		SELECT 
 			`id`
 			, `userId`
 			, `title`
@@ -53,6 +55,8 @@
 			`post`
 		WHERE 
 			`id` = #{id}
- 	</select>
+	
+	</select>
+
  	
  </mapper>
