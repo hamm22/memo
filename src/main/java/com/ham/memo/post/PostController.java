@@ -28,7 +28,6 @@ public class PostController {
 		
 		int userId = (Integer)session.getAttribute("userId");
 		
-		
 		List<Post> postList = postService.getPostList(userId); //로그인한 사용자의 id값
 		
 		model.addAttribute("postList", postList);
