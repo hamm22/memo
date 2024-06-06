@@ -24,7 +24,7 @@
 				
 				<textarea rows="7" class="form-control mt-3" id="contentsInput">${post.contents }</textarea>
 				
-				<img src="${post.imagePath }">
+				<img src="${post.imagePath }" class="mt-2" width="250" height="150">
 				
 				<div class="d-flex justify-content-between mt-3">
 					<div>
@@ -84,9 +84,6 @@
 			}
 			
 			let id = $("#postBox").data("post-id");
-			
-			// 검증
-			// alert("수정된 제목: " + title);
 			
 			$.ajax({
 				type:"put"

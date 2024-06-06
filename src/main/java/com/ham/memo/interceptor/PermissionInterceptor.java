@@ -44,11 +44,8 @@ public class PermissionInterceptor implements HandlerInterceptor{
 				response.sendRedirect("/post/list-view");
 				return false;
 			}
-
-			
 	    }
 			
-		
 		return true;
 	}
 }
